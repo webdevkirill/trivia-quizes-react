@@ -1,34 +1,20 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import './App.css';
 import CategorySelector from './components/CategorySelector';
 import Scoreboard from './components/Scoreboard';
 import Question from './components/Question';
 import ResultModal from './components/ResultModal';
+import useQuize from './hooks/useQuize';
 
 function App() {
-	const [question, setQuestion] = useState(null);
-	const [selectedCategory, setSelectedCategory] = useState('any');
-	const [isCorrect, setIsCorrect] = useState(null);
-
-	const getQuestion = useCallback(() => {
-		setIsCorrect(null);
-		let url = 'https://opentdb.com/api.php?amount=1';
-		if (selectedCategory !== 'any') {
-			url += `&category=${selectedCategory}`;
-		}
-
-		fetch(url)
-			.then((res) => res.json())
-			.then((data) => setQuestion(data.results[0]));
-	}, [selectedCategory]);
-
-	useEffect(() => {
-		getQuestion();
-	}, [getQuestion]);
-
-	const questionAnswerHandler = (answer) => {
-		setIsCorrect(answer === question.correct_answer);
-	};
+	const {
+		question,
+		selectedCategory,
+		isCorrect,
+		getQuestion,
+		setSelectedCategory,
+		setIsCorrect,
+	} = useQuize();
 
 	return (
 		<div className='app'>
@@ -52,7 +38,9 @@ function App() {
 				{question && (
 					<Question
 						question={question}
-						questionAnswerHandler={questionAnswerHandler}
+						questionAnswerHandler={(answer) =>
+							setIsCorrect(answer === question.correct_answer)
+						}
 					/>
 				)}
 			</div>
