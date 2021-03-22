@@ -15,6 +15,10 @@ function App() {
 			<div className='question-main'>
 				<Question />
 			</div>
+
+			<div className='question-footer'>
+				<button>Go to next question 👉</button>
+			</div>
 		</div>
 	);
 }
