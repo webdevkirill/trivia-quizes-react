@@ -1,8 +1,12 @@
 import React from 'react';
+import { shuffleArray } from '../utils';
 
 export default function Question({ question }) {
-	const answers = [...question.incorrect_answers, question.correct_answer];
-	console.log(question.question, answers);
+	const answers = shuffleArray([
+		...question.incorrect_answers,
+		question.correct_answer,
+	]);
+	console.log(answers);
 
 	return (
 		<div className='question'>
