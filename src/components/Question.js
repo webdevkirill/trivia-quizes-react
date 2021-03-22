@@ -1,7 +1,7 @@
 import React from 'react';
 import { shuffleArray } from '../utils';
 
-export default function Question({ question }) {
+export default function Question({ question, questionAnswerHandler }) {
 	const answers = shuffleArray([
 		...question.incorrect_answers,
 		question.correct_answer,
@@ -15,6 +15,7 @@ export default function Question({ question }) {
 				<button
 					key={index}
 					dangerouslySetInnerHTML={{ __html: answer }}
+					onClick={() => questionAnswerHandler(answer)}
 				/>
 			))}
 		</div>
