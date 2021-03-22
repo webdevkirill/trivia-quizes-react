@@ -1,14 +1,15 @@
 import React from 'react';
 
-const sampleAnswers = ['One', 'Two', 'Three', 'Four'];
+export default function Question({ question }) {
+	const answers = [...question.incorrect_answers, question.correct_answer];
+	console.log(question.question, answers);
 
-export default function Question() {
 	return (
 		<div className='question'>
-			<h2>Question Here</h2>
+			<h2 dangerouslySetInnerHTML={{ __html: question.question }} />
 
-			{sampleAnswers.map((answer, index) => (
-				<button key={index}>answer</button>
+			{answers.map((answer, index) => (
+				<button key={index}>{answer}</button>
 			))}
 		</div>
 	);
