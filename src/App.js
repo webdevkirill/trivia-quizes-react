@@ -7,6 +7,8 @@ import Question from './components/Question';
 function App() {
 	return (
 		<div className='app'>
+			{/* <ResultModal /> */}
+
 			<div className='question-header'>
 				<CategorySelector />
 				<Scoreboard />
