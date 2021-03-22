@@ -6,6 +6,7 @@ import Question from './components/Question';
 
 function App() {
 	const [question, setQuestion] = useState(null);
+	const [selectedCategory, setSelectedCategory] = useState('any');
 
 	useEffect(() => {
 		getQuestion();
@@ -18,12 +19,17 @@ function App() {
 			.then((data) => setQuestion(data.results[0]));
 	};
 
+	const chooseCategory = (val) => {};
+
 	return (
 		<div className='app'>
 			{/* <ResultModal /> */}
 
 			<div className='question-header'>
-				<CategorySelector />
+				<CategorySelector
+					selectedCategory={selectedCategory}
+					setSelectedCategory={setSelectedCategory}
+				/>
 				<Scoreboard />
 			</div>
 
